@@ -45,4 +45,20 @@ router.post('/add-item', auth, (req, res) => {
     res.json({ message: 'Item added' });
 });
 
+// Clear orders (replace all orders)
+router.post('/clear-orders', auth, (req,res) => {
+  const { orders } = req.body;
+  fs.writeFileSync('./data/orders.json', JSON.stringify(orders,null,2));
+  res.json({ message:'Orders updated!' });
+});
+
+// Remove items (replace all items)
+router.post('/remove-item', auth, (req,res) => {
+  const { items } = req.body;
+  fs.writeFileSync('./data/items.json', JSON.stringify(items,null,2));
+  res.json({ message:'Item removed!' });
+});
+
+
 module.exports = router;
+
